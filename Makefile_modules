@@ -1,0 +1,9 @@
+obj-m := testmodule.o 	# Add this module to compile list
+KDIR = /lib/modules/$(shell uname -r)/build 	# List to the module maker
+PWD := $(shell pwd) 	# Current folder
+
+testmodule.ko:
+	$(MAKE) -C $(KDIR) M=$(PWD) modules		# Build this module, using another makefile at KDIR folder
+
+clean:
+	$(MAKE) -C $(KDIR) M=$(PWD) clean		# Call clean rule from another makefile
